@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./public/favicon.ico" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="apple-touch-icon" href="./public/logo192.png" />
+    <link rel="manifest" href="./public/manifest.json" />
+    <link rel="stylesheet" href="./index.css">
+    <title>SpurIT-test</title>
+  </head>
+  <body>
+    <div class="spur-it">
+      <section class="spur-it__home">
+        <h1>Digestion is <span>the key</span> to overall wellness in Body, Mind and Spirit</h1>
+        <button id="show"></button>      
+      </section>
+    </div> 
+  <script>
+      function myLibrary(id){        
+        this.modal = document.querySelector(id);
+        this.modalWindow = document.createElement('template');
+
+        this.parseHTML = (html) => {              
+          this.modalWindow.innerHTML = html;
+          return this.modalWindow.content.cloneNode(true);
+        }
+
+        this.btn_open = () => {          
+          this.btn = document.querySelector('#show');
+
+          this.btn.onclick = () => { 
+            this.documentFragment = this.parseHTML(`
+            <div id="modal" class="spur-it__modal">
+              <div class="spur-it__modal-content">
+                <button id="close" class="spur-it__modal-close">&times;</button>
+                <iframe class="spur-it__modal-iframe" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/W7qWa52k-nE" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
+            `);
+
+            document.querySelector('.spur-it').appendChild(this.documentFragment);
+
+            this.modal = document.querySelector(id);
+
+            this.btn_close(this.modal);
+          }        
+          return this;
+        }
+
+        this.btn_close = (modalIsOpen) => {   
+          this.btn = document.querySelector('#close');
+          
+          this.btn.onclick = () => {
+            
+            modalIsOpen.remove();
+          }      
+          return this;
+        }
+
+        this.esc = () => {
+          document.onkeydown = (evt) => {
+            evt = evt || window.event;
+            var isEscape = false;
+            if ("key" in evt) {
+              isEscape = (evt.key === "Escape" || evt.key === "Esc");
+            } else {
+              isEscape = (evt.keyCode === 27);
+            }
+            if (isEscape) {
+              this.destroy();
+            }
+          };
+          return this;
+        }
+
+        this.windOutClick = () => {
+          window.onclick = function(event) {
+            if (event.target === this.modal) {
+              this.destroy();
+            }
+          }
+          return this;
+        }
+
+        this.destroy = () => {
+          this.modal.remove();
+          return this;
+        }
+
+        return this;
+      }
+
+      myLibrary('#modal').btn_open().esc().windOutClick();
+  </script>
+  <!-- <script>
+    var modal = document.querySelector("#modal");
+
+    var btn_show = document.querySelector("#show");
+
+    var btn_close = document.querySelector("#close");
+
+    btn_show.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    btn_close.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    document.onkeydown = function(evt) {
+      evt = evt || window.event;
+      var isEscape = false;
+      if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc");
+      } else {
+        isEscape = (evt.keyCode === 27);
+      }
+      if (isEscape) {
+        modal.style.display = "none";
+      }
+    };
+  </script> -->
+</body>
+</html>
