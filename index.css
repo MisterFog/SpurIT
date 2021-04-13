@@ -57,6 +57,18 @@ body {
   text-align: center;
 }
 
+@media (max-width: 1024px) {
+  .spur-it__home h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .spur-it__home h1 {
+    font-size: 24px;
+  }
+}
+
 .spur-it__home h1 span {
   font-family: "quentinregular";
 }
@@ -128,13 +140,14 @@ body {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  transition: 0.3s;
 }
 
 .spur-it__modal-close:hover,
 .spur-it__modal-close:focus {
-  color: #000;
   text-decoration: none;
   cursor: pointer;
+  transform: scale(1.2);
 }
 
 .spur-it__modal-iframe {
